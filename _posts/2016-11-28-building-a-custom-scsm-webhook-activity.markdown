@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Building a custom webhook Activity"
-subtitle:   "SCSM evelopment"
+subtitle:   "SCSM development"
 date:       2016-11-28 12:00:00
 author:     "Jan Van Meirvenne"
 header-img: "img/scsmbg.jpg"
