@@ -1,0 +1,142 @@
+---
+author: janvanmeirvenne
+comments: true
+date: 2013-04-10 03:47:20+00:00
+layout: post
+link: http://scug.be/jan/2013/04/10/mms-2013-day-2/
+slug: mms-2013-day-2
+title: 'MMS 2013: day 2'
+wordpress_id: 121
+---
+
+ 
+
+ 
+
+Hey guys, it is still jetlagged me again using his last powers of the day to get this post online ![Winking smile](http://scug.be/jan/files/2013/04/wlEmoticon-winkingsmile1.png)
+
+ 
+
+[![WP_20130409_009](http://scug.be/jan/files/2013/04/WP_20130409_009_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130409_009.jpg)
+
+ 
+
+Today was a big day regarding announcements. It all started when I went to my first session: [IM-B202 System Center 2012 SP1 Operations Manager Overview](http://www.2013mms.com/topic/details/IM-B202).
+
+ 
+
+What I expected was a basic overview of [all new features in SCOM SP1](http://technet.microsoft.com/en-us/library/jj656650.aspx), but it turned out a lot of statements were made regarding new and upcoming features.
+
+ 
+
+The small announcement was that the Operations Manager data warehouse now supports up to 25000 managed computers. It is nice to see that the supported capacity keeps increasing even after release.
+
+ 
+
+The big announcement was that [System Center Advisor](https://www.systemcenteradvisor.com/) will now integrate into SCOM! That’s right, no more gateway setup and split management! Advisor will use a connector to obtain and publish data from/to SCOM, without requiring any changes or addition to the existing infrastructure. Best of all, Advisor is now FREE! So what is stopping you from [trying it out](http://www.microsoft.com/en-us/download/details.aspx?id=38199)?
+
+ 
+
+Another great announcement that a new Azure management will be soon released, which can monitor a lot more Azure-based items like storage, virtual machines, certificates,… Distributed Applications will also be automatically created for each set of resources belonging to the same service. Cameron Fuller took a picture of the [storage monitoring](https://twitter.com/cfullerMVP/status/321677614030929920/photo/1). The new MP will become available this Friday.
+
+ 
+
+The last announcement was the availability of [System Center 2012 SP1 Update Rollup 2](http://support.microsoft.com/kb/2802159)! For Operations Manager there are some major fixes like the [group rename bug](http://scug.be/jan/2013/02/06/the-scom-group-rename-bug-demystified/), the missing path in the dashboard widgets and other long existing issues.
+
+ 
+
+Daniel Savage also promised to improve the quality of the Microsoft MP’s using [the new sustained engineering process](http://blogs.technet.com/b/momteam/archive/2013/03/12/mp-blog-consistent-world-class-manageability.aspx). Even better, if you have an issue with a MP and cannot get it fixed through regular channels, you can contact him at [dsavage@microsoft.com](mailto:dsavage@microsoft.com), and he’ll look into it! It is nice to see the commitment of the product managers to improve their product.
+
+ 
+
+The roadmap for SCOM contains more crossover dashboarding between fabric and application management, reduced overhead of monitoring and more abilities to leverage SCOM data.
+
+ 
+
+Next stop was [IM-B318 Panel Discussion: System Center Operations Manager](http://www.2013mms.com/topic/details/IM-B318). A lot of SCOM product managers where ready to answer questions from the crowd. Some interesting things were discussed like:
+
+ 
+
+- Correlated alerting (do not alert if alert x and y already exist), simplified management pack management (only import the monitors I select from this MP)
+
+ 
+
+This is a discussion point internally, so it is something they are working on.
+
+ 
+
+- More specific RBAC options
+
+ 
+
+For example: giving read-only access to authoring rules to view configuration. This was taken as a feature request.
+
+ 
+
+- How to implement and scope Advisor in a multi-tenant SCOM environment
+
+ 
+
+Setting up one Advisor integration for a management group is all you need, and Advisor alerts can be scoped using roles.
+
+ 
+
+- Mobile Application
+
+ 
+
+There are internal talks if a mobile app must be developed.
+
+ 
+
+- Replacement of the 2007 R2 authoring console
+
+ 
+
+There is a lot of negative feedback regarding the complexity of the new Visual Studio authoring process. Microsoft is aware of this and looking into it.
+
+ 
+
+A PM also dropped the fact that GSM will also become available as a privately hostable entity, so you can specify your own intervals and such. This gives more control over the way it works.
+
+ 
+
+The third session was [IM-B313 Workloads: Managing Windows, IIS & SQL Technologies](http://www.2013mms.com/topic/details/IM-B313). This was a howto, best-practice session about how to monitor SQL Server with SCOM. It also showcased new, upcoming feature of the next SQL MP. The big eyecatcher was an extensive dashboard providing snap performance information for SQL Servers. Release date is unknown at this point.
+
+ 
+
+[![WP_20130409_007](http://scug.be/jan/files/2013/04/WP_20130409_007_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130409_007.jpg)
+
+ 
+
+The fourth session, [IM-B315 Business Continuity with System Center](http://www.2013mms.com/topic/details/IM-B315), which was presented by among others our fellow SCUG-member Mike Resseler! While my main focus is not DPM, I could follow the session without any difficulties, making it a good one! The big announcement for DPM was that it now can backup workloads to Azure! The other feature presented to secure data and continuity was Hyper-V replica, a cool and easy technology built right into Hyper-V, allowing you to replicate VM’s to an offsite hypervisor effortlessly.
+
+ 
+
+[![WP_20130409_012](http://scug.be/jan/files/2013/04/WP_20130409_012_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130409_012.jpg)
+
+ 
+
+The last session of the day was about [IM-B401 Utilizing and Developing Dashboards in Operations Manager 2012 SP1](http://www.2013mms.com/topic/details/IM-B401). It was a deep dive into custom dashboarding for SCOM, something that was (and still is not) very well documented. The in-depth demo was nice to see but hard to follow. Luckily, Microsoft will provide more documentation and samples in the coming months regarding dashboarding!
+
+ 
+
+To conclude the day I went to the Meet-and-Geek. It was a really nice concept: put some people around a table (and there were a lot of tables) and let them get to know each other (not unlike speed-dating). It was a very nice concept and worked very well. I got to talk to some interesting people with evenly interesting stories! The only bad thing was that is was a bit short.
+
+ 
+
+[![WP_20130409_014](http://scug.be/jan/files/2013/04/WP_20130409_014_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130409_014.jpg)
+
+ 
+
+So much for my second day, I ‘m signing off for today. I hope to catch you and a glimpse of Vegas tomorrow, until then!
+
+ 
+
+ 
+
+ps Not so much booty today!
+
+ 
+
+[![WP_20130409_015](http://scug.be/jan/files/2013/04/WP_20130409_015_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130409_015.jpg)

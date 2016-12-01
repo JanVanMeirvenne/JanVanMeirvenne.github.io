@@ -1,0 +1,136 @@
+---
+author: janvanmeirvenne
+comments: true
+date: 2013-04-14 22:50:01+00:00
+layout: post
+link: http://scug.be/jan/2013/04/14/mms-2013-day-4/
+slug: mms-2013-day-4
+title: 'MMS 2013: day 4'
+wordpress_id: 151
+---
+
+Hi guys
+
+ 
+
+ 
+
+I am back in Belgium after an amazing week at MMS, Las Vegas! I got to know some cool people, got to see some nice sceneries and most importantly, had a great first long distance business trip!
+
+ 
+
+ 
+
+I’m a bit late with my final diary entry for the event, but it got late Thursday with the closing party, forcing me to delay this post ;) The party itself was great, although a bit crowded.
+
+ 
+
+[![WP_20130411_070](http://scug.be/jan/files/2013/04/WP_20130411_070_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130411_070.jpg)
+
+ 
+
+Now I am back in Belgium and got a good night’s rest, I can present to you the final topics I followed on the last day:
+
+ 
+
+ 
+
+[](http://channel9.msdn.com/Events/MMS/2013/IM-B201)
+
+ 
+
+[Managing Linux and UNIX in a System Center Private Cloud](http://channel9.msdn.com/Events/MMS/2013/IM-B201)
+
+ 
+
+This session was a good overview of the cross-platform capabilities of the System Center stack. While it did know the abilities of SCOM, it was interesting to see how you could also use SCCM and SCVMM on Linux and Unix devices. Being able to deploy a Linux-based workload by using the templating (both VM and service) system in SCVMM is a great functionality. SCCM has an equally interesting feature pack: deploying software or updates and being able to collect hardware inventory is a great advancement in the configuration management space. For those who don’t yet know: SCOM can monitor Linux and Unix environments using a set of management packs by Microsoft and a special Linux agent. There are only a few distro’s supported, but the number was expanded by the SP1 release: CentOS, Debian, Ubuntu, and Oracle Linux.
+
+ 
+
+It is nice to see that Microsoft is committing to enable the management of any type of cloud setup, whether homo- or heterogeneous, private or public. I believe however that if you have a big number of non-Microsoft workloads, you might need to get some 3rd party extensions in order to have a comfortable experience. I think of specialized management packs for Oracle, MySql,… or addons for SCVMM and SCCM, these are a must if you want to maintain a holistic overview of those workloads.
+
+ 
+
+[![image](http://scug.be/jan/files/2013/04/image_thumb3.png)](http://scug.be/jan/files/2013/04/image3.png)
+
+ 
+
+[](http://channel9.msdn.com/Events/MMS/2013/SD-B316)
+
+ 
+
+[Advanced Real World System Center Data Warehouse and Reporting](http://channel9.msdn.com/Events/MMS/2013/SD-B316)
+
+ 
+
+The next session was a presentation of how Microsoft used SCOM and SCSM data to improve the efficiency of their helpdesk dramatically. By building a cube that integrates and correlates SCOM alerts and SCSM tickets, it was possible to quickly distinguish actionable events from non-actionable ones. This enabled the service desks to stop wasting time on events that they could not resolve, and focus more on the ones that mattered. This cube also enabled excellent reports like ‘top helpdesk performers’, ‘tickets fixed in SLA/out of SLA’,… The future rodmap had plans to also add SCCM data, to look which systems generated the most events etc. The cube is an impressive example of the power of datawarehousing in System Center. The only bad thing was that it was an internal solution, and any documentation is not available at the moment.
+
+ 
+
+[![image](http://scug.be/jan/files/2013/04/image_thumb4.png)](http://scug.be/jan/files/2013/04/image4.png)
+
+ 
+
+[Automating System Center Deployment with the Powershell Deployment Toolkit](http://channel9.msdn.com/Events/MMS/2013/SD-B302)
+
+ 
+
+From an automation standpoint this was a very impressive session. It showed how the [Powershell Deployment Toolkit](http://gallery.technet.microsoft.com/PowerShell-Deployment-4261fd30) replaces the Universal Installer that was presented previous year. By editing the accompanied XML-files, a System Center stack implementation can be done in under one hour! The system is still somewhat difficult to use, as XML knowledge is required and all actions start from a script execution. A decent front-end to this would make it even nicer, but the true power of it is already present!
+
+ 
+
+[![image](http://scug.be/jan/files/2013/04/image_thumb5.png)](http://scug.be/jan/files/2013/04/image5.png)
+
+ 
+
+[DevOps: Azure Monitoring & Authoring Updates for Operations Manager 2012 SP1](http://channel9.msdn.com/Events/MMS/2013/AM-B306)
+
+ 
+
+I was a bit afraid that this would be another iteration of the whole TFS integration story, but luckily I was wrong. It presented the new features of the [updated Azure management pack](http://www.microsoft.com/en-us/download/details.aspx?id=38414). Afterwards the new Visual Studio plugin was showcased. The most notable change is that Visual Studio 2012 is now finally supported. Another nice announcement was that the authoring documentation will receive a major update by this summer:
+
+ 
+
+- The MP authoring documentation will be updated for 2012 and cover the usage of the new tools
+
+ 
+
+- An integration guide will be made available, providing an overview of the available components for all System Center products
+
+ 
+
+- An authoring hub will house all community creations regarding System Center authoring
+
+ 
+
+[![image](http://scug.be/jan/files/2013/04/image_thumb6.png)](http://scug.be/jan/files/2013/04/image6.png)
+
+ 
+
+[Augmenting Your Windows Management Strategy with System Center 2012 Configuration Manager Task Sequences](http://channel9.msdn.com/Events/MMS/2013/UD-B303)
+
+ 
+
+This was a session I randomly picked, and it didn’t disappoint. It was a showcase of how and when Task Sequences should be used in SCCM. It was very interactive with a quiz, and some nice demonstrations showed several useful scenario’s. A great tips and tricks session!
+
+ 
+
+[![image](http://scug.be/jan/files/2013/04/image_thumb7.png)](http://scug.be/jan/files/2013/04/image7.png)
+
+ 
+
+ 
+
+Well this was it, my first MMS event! I will follow up on this post with my top sessions of the event, with some technical posts later on on the new features that were presented. In the meantime, you can check out all sessions on [Channel 9](http://channel9.msdn.com/Events/MMS/2013).
+
+ 
+
+While its future is uncertain, I really hope to see an MMS 2014!
+
+ 
+
+[![WP_20130411_011](http://scug.be/jan/files/2013/04/WP_20130411_011_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130411_011.jpg)
+
+ 
+
+See you later!

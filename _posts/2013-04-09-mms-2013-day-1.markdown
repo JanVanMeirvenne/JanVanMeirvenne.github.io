@@ -1,0 +1,134 @@
+---
+author: janvanmeirvenne
+comments: true
+date: 2013-04-09 04:58:04+00:00
+layout: post
+link: http://scug.be/jan/2013/04/09/mms-2013-day-1/
+slug: mms-2013-day-1
+title: 'MMS 2013: day 1'
+wordpress_id: 113
+---
+
+Hello guys
+
+ 
+
+I didn’t mention it earlier, but I’m currently attending [MMS](http://www.2013mms.com/)! It is my first time both in the US and at this event, so I’m very excited to be here!
+
+ 
+
+All I can currently say is ‘wow”, and ‘yawn’ (considering my bio-functions are 9 hours out of sync). Las Vegas is an incredible place with its scale, outlook and entertainment options.
+
+ 
+
+[![WP_20130408_032](http://scug.be/jan/files/2013/04/WP_20130408_032_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_032.jpg)
+
+ 
+
+[![WP_20130408_004](http://scug.be/jan/files/2013/04/WP_20130408_004_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_004.jpg)
+
+ 
+
+[![WP_20130408_025](http://scug.be/jan/files/2013/04/WP_20130408_025_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_025.jpg)
+
+ 
+
+I hope to get to do some sightseeing, but I am primarily here for some knowledge transfer and networking of course (and gadget hunting ![Smile](http://scug.be/jan/files/2013/04/wlEmoticon-smile.png)).
+
+ 
+
+ 
+
+I’ll try to make a short post each day outlining the important things I learned, in order to provide you a glimpse of what you are missing ![Winking smile](http://scug.be/jan/files/2013/04/wlEmoticon-winkingsmile.png).
+
+ 
+
+ 
+
+The first day started with (naturally) the keynote with Brad Anderson. The theme of this edition is ‘CLOUD OPTIMIZE YOUR BUSINESS’. It is the typical story of moving from a traditional IT model towards a private/public cloud model. The concept wasn’t new, but I felt it was brought more complete than the version that was presented previous year.
+
+ 
+
+[![WP_20130408_028](http://scug.be/jan/files/2013/04/WP_20130408_028_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_028.jpg)
+
+ 
+
+The demonstrations were to the point and showed the right scenario’s (application monitoring, byod security, storage performance, automation,…). An impressive case study was that of Domino’s pizza being now able to have 2 admins manage 15000 vms while reducing service call with 99%, just by using Server 2012 and System Center!
+
+ 
+
+See the keynote opening video [here](http://blogs.technet.com/b/in_the_cloud/archive/2013/04/08/in-case-you-missed-it-the-mms-2013-keynote-opener-video.aspx).
+
+ 
+
+Afterwards I attended a session that described in more detail how the keynote demos were setup and why specific scenario’s were chosen. This was interesting to see because it helps to select your own scenarios for your own demos. It was very technical, the conceptual story was already told during the keynote.
+
+ 
+
+[![WP_20130408_031](http://scug.be/jan/files/2013/04/WP_20130408_031_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_031.jpg)
+
+ 
+
+Btw, the infrastructure for MMS is running the 2012-stack (of course), and this is how it looks like:     
+
+
+ 
+
+[![WP_20130408_034](http://scug.be/jan/files/2013/04/WP_20130408_034_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_034.jpg)
+
+ 
+
+Small, isn’t it?     
+
+
+ 
+
+ 
+
+My first real session was ‘AM-B303 DevOps: Global Service Monitoring with System Center Operations Manager 2012 SP1’.
+
+ 
+
+It was about the integration between TFS & Visual Studio and Operations Manager. I didn’t have first-hand experience with it and it was very nice to see the feature in action. The DevOps principle works as follows:
+
+ 
+
+- A monitored applications generates an alert which the Operations team picks up     
+- Operations notices that it is an application error and send it to the developer team      
+- The developer team uses the attached debug data to solve the issue and close the event
+
+ 
+
+By integrating TFS and SCOM, you have a single platform capable of bridging the everlasting gap between the two teams (Dev and Ops). Some nice details are the ability to import Visual Studio tests into SCOM, and to have SCOM send various files (test results, intellitraces) back to TFS, where a workitem is generated. The Global Service Monitor was also presented shorty: an Azure principle that enables you to run application tests from Microsoft’s public data centers all over the world!
+
+ 
+
+The second session I attended was ‘IM-B392 Hacking the Data Warehouse: Mastering the Reporting Experience in System Center 2012 Operations Manager’. It was a session presented by [Veeam](http://www.veeam.com) and it started off very promising: how do we query the SCOM data warehouse? 
+
+ 
+
+I am relatively novice with SQL and SCOM, and have built some custom reports on my own. The demo’s that were given were of a very deep technical level, to the point were even I (not exactly a manager-type) was baffled. A couple of people left because they underestimated the technical level of the session.
+
+ 
+
+It was interesting to see how Veeam used a tool icw Excel to generate custom reports, but I felt that the information was somewhat too specific and complex to take in in one hour.
+
+ 
+
+That concluded my day regarding sessions. I did one quick handson lab were I created a management pack using Visio. Ironically I am pretty knowledgeable with the Visual Studio extension, but Visio eluded me still. The lab guide was clear and I quickly understood how it all fit together.[![WP_20130408_048](http://scug.be/jan/files/2013/04/WP_20130408_048_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_048.jpg)
+
+ 
+
+To finish it off, I attended the reception where I went on some ‘gadget and info hunting’ in the expo hall. It is a place were you can have a lot of fun (contests, prizes, …) but also can network a lot.
+
+ 
+
+[![WP_20130408_049](http://scug.be/jan/files/2013/04/WP_20130408_049_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_049.jpg)
+
+ 
+
+[![WP_20130408_039](http://scug.be/jan/files/2013/04/WP_20130408_039_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130408_039.jpg)
+
+   
+
+So far my MMS experience, see you tomorrow!

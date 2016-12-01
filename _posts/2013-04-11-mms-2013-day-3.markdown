@@ -1,0 +1,116 @@
+---
+author: janvanmeirvenne
+comments: true
+date: 2013-04-11 05:55:15+00:00
+layout: post
+link: http://scug.be/jan/2013/04/11/mms-2013-day-3/
+slug: mms-2013-day-3
+title: 'MMS 2013: day 3'
+wordpress_id: 140
+---
+
+Hey guys, I’m finally over my jetlag! Here is what happened at the 3rd day of my MMS experience:
+
+ 
+
+[![WP_20130410_014[1]](http://scug.be/jan/files/2013/04/WP_20130410_0141_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130410_0141.jpg)
+
+ 
+
+[IM-B402 Debug Production Application Issues using System Center Operations Manager](http://www.2013mms.com/topic/details/IM-B402)
+
+ 
+
+A great session with a dynamic team of presenters: Mickey Gousset and Brian Randell. They used a roleplaying technique to illustrate how developers and operations uys could work together to resolve application issues using Application Performance Monitoring, Intellitrace and TFS Workitem Sync in Operations Manager. By debugging the application in a production environment, and sharing the information from this process between Operations tools and Dev tools, being able to have the best of both worlds becomes reality! The workflow was demoed like this:
+
+ 
+
+- Operations receive an exception alert for a live application using APM
+
+ 
+
+- Using TFS sync, the alert is assigned to the developer team
+
+ 
+
+- The developer team receives a new work item in the TFS portal, complete with a small trace of the issue which they can debug in Visual Studio
+
+ 
+
+- The developers want to have an IntelliTrace file, they request this in the work item and set the status to ‘Awaiting Evidence’
+
+ 
+
+- The operations team notices the request and use SCOM to enable IntelliTrace on the application (it is recommended to do this using a fileshare, which is an overridable setting, because trace-files can become really big). After the issue is reproduced, the trace is collected and the alert is re-assigned to engineering
+
+ 
+
+- The developer team receives the update and can fully debug and fix the issue!
+
+ 
+
+[![image](http://scug.be/jan/files/2013/04/image_thumb.png)](http://scug.be/jan/files/2013/04/image.png)
+
+ 
+
+[SD-B314 Mission: IT Operations for a Good Night's Sleep](http://www.2013mms.com/topic/details/SD-B314)
+
+ 
+
+This was a nice overview session about how different System Center products can be brought together to form a rigorous supporting platform for your IT Operations processes. The good thing about this session was that it went further than only the technology and also talked about the necessity of decent, standardized processes (like [MOF](http://technet.microsoft.com/en-us/library/cc506049.aspx)) to leverage the technology. Most notable demo was the shared datawarehouse of SCSM (with SCCM, AD and SCOM data) with the ability to create some nifty reports.
+
+ 
+
+[![image](http://scug.be/jan/files/2013/04/image_thumb1.png)](http://scug.be/jan/files/2013/04/image1.png)
+
+ 
+
+[AM-B201 Monitoring Applications Using APM, Global Service Monitor, and Visual Studio Web Testing](http://www.2013mms.com/topic/details/AM-B201)
+
+ 
+
+I can be short about this: it was the exact same presentation as the first session of the day, only presented a bit less good. Lessons learned: MMS sessions can overlap 100%.
+
+ 
+
+[SD-B313 Effective Capacity Planning of Your Infrastructure Resources](http://www.2013mms.com/topic/details/SD-B313)
+
+ 
+
+One of the best Operations Manager sessions of the event. One of the major pain points in IT management is the question how and when the infrastructure must grow. Operations Manager is the goto product to collect all the metrics from all the different layers of your infrastructure to make accurate forecasting possible. And by using analytic tools like SQL Analysis Services and Performance Point the data SCOM provides can be molded in a readable, advising document which can be used to perform capacity management. 
+
+ 
+
+[![image](http://scug.be/jan/files/2013/04/image_thumb2.png)](http://scug.be/jan/files/2013/04/image2.png)
+
+   
+
+[IM-B316 Monitoring and Managing the Network and Storage Infrastructure with Operations Manager 2012](http://www.2013mms.com/topic/details/IM-B316)
+
+ 
+
+This presentation provided a good overview of the advancements of SCOM regarding network and storage monitoring. In SP1, a lot of new network devices are supported. Also the virtual Hyper-V switch can now be monitored and used in the network vicinity dashboard!
+
+ 
+
+Regarding storage, all the major vendors have updated their MP’s for their storage products. The ability to monitor storage usage in VMM is also very neat!
+
+ 
+
+Furthermore capacity management and dashboarding were mentioned. [Savision Live Maps](http://www.savision.com/products/live-maps-system-center-0) was presented as well as a decent (and rightfully so) tool to create your custom dashboards!
+
+ 
+
+After the sessions I joined the [Provance](http://www.provance.com/) party, where I hanged out with some fellow SCUG members, but also met up with a lot of guys working with various Windows technologies. It is nice to see the different perspectives and priorities people have regarding what’s presented at MMS, and some knowledge discussion and sharing is always fun!
+
+ 
+
+[![WP_20130410_032[1]](http://scug.be/jan/files/2013/04/WP_20130410_0321_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130410_0321.jpg)
+
+ 
+
+[![WP_20130410_030[1]](http://scug.be/jan/files/2013/04/WP_20130410_0301_thumb.jpg)](http://scug.be/jan/files/2013/04/WP_20130410_0301.jpg)
+
+ 
+
+See you tomorrow!
