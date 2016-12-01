@@ -5,6 +5,7 @@ subtitle:   "Connect SCSM to the cloud"
 date:       2016-11-28 12:00:00
 author:     "Jan Van Meirvenne"
 header-img: "img/scsmbg.jpg"
+comments: true
 ---
 
 Although being one of the underdogs of the System Center suite, [Service Manager](https://technet.microsoft.com/en-us/system-center-docs/sm/service-manager) does have its perks.
@@ -32,7 +33,7 @@ This actvity allows you to configure the following parameters:
 <img src="{{ site.url }}/assets/SCSM_WHA1.png" widht="1000" height="500" />
 <img src="{{ site.url }}/assets/SCSM_WHA1.png" widht="1000" height="500" />
 
-# How does it work?
+## How does it work?
 
 When a webhook activity is set to 'in progress' by the SCSM workflow engine, it will trigger a custom workflow that will do the following:
 
@@ -49,14 +50,14 @@ When a webhook activity is set to 'in progress' by the SCSM workflow engine, it 
 {"WebhookName":"default","RequestBody":"{\"First\":\"Alain\",\"Last\":\"Vandam\",\"Department\":\"Logistics\",\"Office\":\"Dusseldorf\",\"License\":\"Yes\",\"Country\":\"BE\",\"Mobile\":\"+32478707741\",\"ActivityId\":\"a1ffd77d-8693-a5a4-ddbf-aaf2d99cb060\"}","RequestHeader":{"Connection":"Keep-Alive","Expect":"100-continue","Host":"s2events.azure-automation.net","x-ms-request-id":"50161b9c-043d-47c8-96f7-03bb2ea3fc3d"}}
 {% endhighlight %}
 
-# Requirements
+## Requirements
 
 * For the JSON encoding, an external DLL is used. It is packaged in the release.
 * The workflow server must have web access towards the used webhook URL's
 * The workflow account must have advanced author rights in SCSM
 * SCSM 2016 (tested) or 2012 R2 (shoud work, else notify me :))
 
-# Install Instructions
+## Install Instructions
 
 * Import the management pack
 * Copy to the 2 DLL's inside the SCSM Workflow Server's installation folder
