@@ -20,7 +20,7 @@ The hybrid scenario where on-prem (for example SCSM) meets cloud (Azure Automati
 
 ## Proudly announcing: The Webhook Activity Management Pack
 
-What does this management pack do? It adds an extra activity 'Webhook Activity' type to the SCSM mix. When set to 'in progress' it will send configurable data to a webhook url where the underlying service can consime it (like Azure Automation).
+What does this management pack do? It adds an extra activity 'Webhook Activity' type to the SCSM mix. When set to 'in progress' it will send configurable data to a webhook url where the underlying service can consume it (like Azure Automation).
 
 This actvity allows you to configure the following parameters:
 
@@ -31,7 +31,7 @@ This actvity allows you to configure the following parameters:
 * Activity ID Parameter: Allows you to specify the parameter-name for the activity-id (default: ActivityID)
 
 <img src="{{ site.url }}/assets/SCSM_WHA1.png" widht="1000" height="500" />
-<img src="{{ site.url }}/assets/SCSM_WHA1.png" widht="1000" height="500" />
+<img src="{{ site.url }}/assets/SCSM_WHA2.png" widht="1000" height="500" />
 
 ## How does it work?
 
