@@ -15,7 +15,7 @@ During the join-process, the device's volumes are automatically encrypted and th
 
 Of course it is possible to Bitlocker the volumes and store the info in AAD manually, but this last action is only exposed through a GUI.
 
-<img src="{{ site.url }}/assets/BitlockerAADButton.png" width="1000" height="500" />
+<img src="{{ site.url }}/assets/BitlockerAADButton.png" />
 
 I used [Fiddler](http://www.telerik.com/fiddler) to find out which communication occurs with AAD when this button is pressed, and found out that it is a rather easy proces to wrap in a PowerShell script.
 
