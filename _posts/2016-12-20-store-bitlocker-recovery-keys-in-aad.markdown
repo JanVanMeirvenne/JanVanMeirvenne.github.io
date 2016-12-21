@@ -27,4 +27,4 @@ Usage:
 {% highlight PowerShell %}
 <# When the OSDrive-parameter is omitted, the SystemDrive environment variable is used #>
 Enable-AADBitlocker.ps1 [-OSDrive C:] 
-<% endhighlight %>
+{% endhighlight %}
