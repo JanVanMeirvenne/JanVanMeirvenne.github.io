@@ -22,3 +22,9 @@ I used [Fiddler](http://www.telerik.com/fiddler) to find out which communication
 I put this script in the [Powershell Gallery](https://www.powershellgallery.com/packages/Enable-AADBitlocker/0.0.0.2/Content/Enable-AADBitlocker.ps1). It enables TPM- and RecoveryPassword-based Bitlocker encrypton on the OS disk, and then uploads the information to Azure AD. Your device needs to be joined, and the script has to be run as an admin.
 
 You can [wrap](http://126kr.com/article/90t7z4t57b6) this script in an executable so that it can be deployed through Intune or another MDM to allow for a smooth end-user experience!
+
+Usage:
+{% highlight PowerShell %}
+<# When the OSDrive-parameter is omitted, the SystemDrive environment variable is used #>
+Enable-AADBitlocker.ps1 [-OSDrive C:] 
+<% endhighlight %>
