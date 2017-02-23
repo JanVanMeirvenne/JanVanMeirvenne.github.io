@@ -22,7 +22,7 @@ Get-SCSMObject -Id $MyObjectId|Remove-SCSMObject -Force
 
 You can target a specific SCSM management group in multiple ways:
 
-* You can set a variable $SMDefaultComputer with the value of a SCSM management server, which will be used as default connection point for any command from then connection
+* You can set a variable $SMDefaultComputer with the value of a SCSM management server, which will be used as default connection point for any command
 * Each command supports the '-ComputerName' switch, which sets the management server to be used for that command
 
 ## However...
