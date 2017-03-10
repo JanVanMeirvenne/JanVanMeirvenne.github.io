@@ -60,24 +60,24 @@ Before we can show anything in the console / portal, we need to add a new list '
     <EntityTypes>
       <ClassTypes>
 		 Add the support group field to the problem class by using an extension -->
-        <ClassType ID="VDW.SM.PR.SupportGroupExtension" Abstract="false" Accessibility="Public" Hosted="false" Singleton="false" Base="SWPL!System.WorkItem.Problem" Extension="true">
-          <Property ID="SupportGroup" EnumType="VDW.SM.PR.SupportGroupEnum" Type="enum" />
+        <ClassType ID="Custom.SM.PR.SupportGroupExtension" Abstract="false" Accessibility="Public" Hosted="false" Singleton="false" Base="SWPL!System.WorkItem.Problem" Extension="true">
+          <Property ID="SupportGroup" EnumType="Custom.SM.PR.SupportGroupEnum" Type="enum" />
         </ClassType>
         
       </ClassTypes>
       <EnumerationTypes>
 		<!-- The actual list is defined here -->
-        <EnumerationValue ID="VDW.SM.PR.SupportGroupEnum" Accessibility="Public" />
+        <EnumerationValue ID="Custom.SM.PR.SupportGroupEnum" Accessibility="Public" />
       </EnumerationTypes>
     </EntityTypes>
     
   </TypeDefinitions>
   <Categories>
 	<!-- These categories are needed to make the list show up in our console (authoring / lists) -->
-    <Category ID="VDW.SM.PR.SupportGroupEnumCategory1" Target="VDW.SM.PR.SupportGroupEnum" Value="MESUA!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
-    <Category ID="VDW.SM.PR.SupportGroupEnumCategory2" Target="VDW.SM.PR.SupportGroupEnum" Value="System!VisibleToUser" />
-    <Category ID="VDW.SM.PR.SupportGroupManagementPackCategory" Value="MESUC!Microsoft.SystemCenter.ManagementPack">
-      <ManagementPackName>VDW.SM.PR.SupportGroup</ManagementPackName>
+    <Category ID="Custom.SM.PR.SupportGroupEnumCategory1" Target="Custom.SM.PR.SupportGroupEnum" Value="MESUA!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="Custom.SM.PR.SupportGroupEnumCategory2" Target="Custom.SM.PR.SupportGroupEnum" Value="System!VisibleToUser" />
+    <Category ID="Custom.SM.PR.SupportGroupManagementPackCategory" Value="MESUC!Microsoft.SystemCenter.ManagementPack">
+      <ManagementPackName>Custom.SM.PR.SupportGroup</ManagementPackName>
       <ManagementPackVersion>1.0.0.0</ManagementPackVersion>
       <ManagementPackPublicKeyToken>6bd7dd9c936b3b55</ManagementPackPublicKeyToken>
     </Category>
@@ -86,7 +86,7 @@ Before we can show anything in the console / portal, we need to add a new list '
     <LanguagePack ID="ENU" IsDefault="true">
       <DisplayStrings>
 	  <!-- User-Friendly naming of our new property -->
-        <DisplayString ElementID="VDW.SM.PR.SupportGroupEnum">
+        <DisplayString ElementID="Custom.SM.PR.SupportGroupEnum">
           <Name>Problem Support Group</Name>
         </DisplayString>
       </DisplayStrings>
@@ -120,8 +120,8 @@ The SCSM management pack structure allows you to define overrides for existing f
 <ManagementPackFragment SchemaVersion="SM2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Categories>
     
-    <Category ID="VDW.SM.PR.FormCustomizations.ManagementPackCategory" Value="MESUC!Microsoft.SystemCenter.ManagementPack">
-      <ManagementPackName>VDW.SM.PR.FormCustomizations</ManagementPackName>
+    <Category ID="Custom.SM.PR.FormCustomizations.ManagementPackCategory" Value="MESUC!Microsoft.SystemCenter.ManagementPack">
+      <ManagementPackName>Custom.SM.PR.FormCustomizations</ManagementPackName>
       <ManagementPackVersion>1.0.0.0</ManagementPackVersion>
       <ManagementPackPublicKeyToken>6bd7dd9c936b3b55</ManagementPackPublicKeyToken>
     </Category>
@@ -129,7 +129,7 @@ The SCSM management pack structure allows you to define overrides for existing f
   <Presentation>
     <Forms>
 		<!-- Specify a new form which will be 'grafted' on an existing form (baseform). We need to specify the projection-type (to let the form know which data should be retrieved) and the internal name of the form (smlets can help with finding this value: Get-SCSMForm|select typename) -->
-      <Form ID="VDW.SM.PR.FormCustomizations.Form" Accessibility="Public" BaseForm="SPL!ServiceManager.ProblemManagement.Library.Form.Problem" Target="SPL!System.WorkItem.Problem.ProjectionType" TypeName="Microsoft.EnterpriseManagement.ServiceManager.Applications.ProblemManagement.Forms.ProblemForm">
+      <Form ID="Custom.SM.PR.FormCustomizations.Form" Accessibility="Public" BaseForm="SPL!ServiceManager.ProblemManagement.Library.Form.Problem" Target="SPL!System.WorkItem.Problem.ProjectionType" TypeName="Microsoft.EnterpriseManagement.ServiceManager.Applications.ProblemManagement.Forms.ProblemForm">
         <Category>Form</Category>
         <Customization>
 		<!-- We can either use the XML customization tag to add controls and modify properties -->
@@ -161,14 +161,14 @@ The SCSM management pack structure allows you to define overrides for existing f
             <NewValue>100</NewValue>
           </PropertyChange>
 		  <!-- A more flexible way (if you know your way around C#) is to configure the extra form controls in a custom usercontrol and add it -->
-          <AddControl Parent="StackPanel106" Assembly="VDW.SM.PR.UserControlOverride, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="VDW.SM.PR.UserControlOverride.Override" Left="0" Top="0" Right="0" Bottom="0" Row="0" Column="0" />
+          <AddControl Parent="StackPanel106" Assembly="Custom.SM.PR.UserControlOverride, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="Custom.SM.PR.UserControlOverride.Override" Left="0" Top="0" Right="0" Bottom="0" Row="0" Column="0" />
         </Customization>
       </Form>
     </Forms>
   </Presentation>
   <Resources>
   <!-- We need to specify our custom user control assembly here so it can be accessed by the console -->
-    <Assembly ID="VDW.SM.PR.FormCustomizations.Assembly" Accessibility="Public" FileName="VDW.SM.PR.UserControlOverride.dll" QualifiedName="VDW.SM.PR.UserControlOverride, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Assembly ID="Custom.SM.PR.FormCustomizations.Assembly" Accessibility="Public" FileName="Custom.SM.PR.UserControlOverride.dll" QualifiedName="Custom.SM.PR.UserControlOverride, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </Resources>
 </ManagementPackFragment>
 
@@ -189,12 +189,12 @@ I will describe the last option as it is the least documented one on the interne
 * Create a new WPF User Control Library in Visual Studio. All the info is in the old, but gold article from Anton Gritsenko [here](http://blog.scsmsolutions.com/2011/08/create-custom-user-control-for-scsm-2010/)
 * Modify the user control so that it is invisible (we only need the code-behind, not the actual layout functions). Setup an event handler for the datacontextchanged-event. This will enable us to execute code once the SCSM form is loaded with data.
 {% highlight XML %}
-<UserControl x:Class="VDW.SM.PR.UserControlOverride.Override"
+<UserControl x:Class="Custom.SM.PR.UserControlOverride.Override"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:VDW.SM.PR.UserControlOverride"
+             xmlns:local="clr-namespace:Custom.SM.PR.UserControlOverride"
              mc:Ignorable="d" Width="0" Height="0" Visibility="Collapsed" DataContextChanged="UserControl_DataContextChanged">
 </UserControl>
 {%endhighlight%}
