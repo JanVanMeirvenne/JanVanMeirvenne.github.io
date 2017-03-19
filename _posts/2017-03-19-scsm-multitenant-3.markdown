@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Setting up Service Manager for multi-tenancy"
-subtitle:   "Part 2: extending work- and configuration items for isolation"
+subtitle:   "Part 3: Restricting forms and controls"
 date:       2017-03-19 12:00:00
 author:     "Jan Van Meirvenne"
 comments: true
