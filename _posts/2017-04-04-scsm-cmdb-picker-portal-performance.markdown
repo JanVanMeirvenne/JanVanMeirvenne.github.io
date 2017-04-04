@@ -7,6 +7,7 @@ author:     "Jan Van Meirvenne"
 header-img: "img/scsmbg.jpg"
 comments: true
 ---
+
 # Slow loading of CMDB picker controls in the SCSM portal
 
 ## The issue
