@@ -232,3 +232,4 @@ This reduced the load time of ~50 seconds in IE11 to ~17! This was done in a dev
 * [JQuery Data Tables](https://www.datatables.net/)
 * [SCSM Hardware Requirements](https://technet.microsoft.com/system-center-docs/system-requirements/system-requirements)
 * [System Center SQL Best Practices, old but gold](http://www.hasmug.com/wp-content/uploads/2012/10/07-201210-Oct-SQL-Server-Optimization-and-Best-Practices-for-System-Center-Administrators-Kevin-Holman.pdf)
+
