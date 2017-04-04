@@ -4,7 +4,6 @@ title:      "Slow cmdb picker controls in request forms"
 subtitle:   "Troubleshooting SCSM portal performance"
 date:       2017-04-04 12:00:00
 author:     "Jan Van Meirvenne"
-header-img: "img/scsmbg.jpg"
 comments: true
 ---
 
