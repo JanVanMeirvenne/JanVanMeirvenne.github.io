@@ -8,8 +8,6 @@ header-img: "img/scsmbg.jpg"
 comments: true
 ---
 
-# Slow loading of CMDB picker controls in the SCSM portal
-
 ## The issue
 
 When a service offering contains a CMDB input with a high amount of objects behind it, it may cause issues in the Self-Service portal.
