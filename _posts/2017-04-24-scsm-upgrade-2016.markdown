@@ -1,0 +1,231 @@
+---
+layout: post
+title: "The journey to SCSM 2016"
+subtitle: "Steps and Resources to aid your conquest"
+date: 2017-04-24 12:00:00
+author: "Jan Van Meirvenne"
+header-img: "img/scsmbg.jpg"
+comments: true
+---
+
+I am currently working on a multi-environment SCSM upgrade. I recently completed the upgrade of the development platform (which has the same components as production). By posting my experiences, I hope to help you get to 2016 as smoothly as possible.
+
+# Pre-Upgrade steps
+
+Before downloading the setup and spamming next, next, finish, first you need to asses the following things:
+
+## Custom & 3rd party management packs
+
+One of the fun things about SCSM (and the SC stack in general) is the authoring options. Creating custom data structures and visualizing them alongside default features results in a flexible platform that can be tailored to your process' needs.
+
+Unfortunately, the SDK has shifted some components related to form authoring around. This requires a rebuild of the affected management packs (and contained assemblies) using the new 2016 SDK.
+
+In order to identify which management packs are affected, you can do the following:
+
+* Export all (also unsealed) management packs to a temporary location
+
+```PowerShell
+Get-SCSManagementPack | Export-SCManagementPack -Path <Temp Path>
+```
+
+* Out-of-the box management packs (starting with 'Microsoft','System','ServiceManager',...) are handled during the upgrade automatically and are not your problem
+
+* Any 3rd party management pack that has either a workflow (search for <Rule> tags in the XML), or an assembly (Assemblies are referred under the <Resources>-tag) defined must be added to the 'incompatible' list
+
+* Other custom management packs that contain custom classes, lists, views, ... are usually safe and will be upgraded in-place without issues
+
+When you have established which management packs need an upgrade, you must identify whether they are in-house developed, or 3rd part (Cireson, Provance, ITNetx, community,...)
+
+For any 3rd party MP, check with the vendor for a new version that is compatible with 2016. I noticed that a lot of vendors provide 2 versions of their MP's: one for 2012 and one for 2016. Aside from an abandonded community MP (which I had to manually rebuild for 2016), I did not have any issues obtaining compatible sources.
+
+As the 2016-version only contain updated assemblies, but no breaking changes on the class / relationships part, the MP upgrade (which you perform right after upgrading the SCSM platform) should be as simple as just importing the new version and everything should keep working.
+
+For in-house (or tailored) MP's, you (or your SCSM guru) will need to take the code for 2012 and recompile it against the 2016 SDK. Depending on the structure of your code, this can be a pretty hard or painless process.
+
+I am not going to detail the process of upgrading code in this post, as both [Microsoft](https://blogs.technet.microsoft.com/servicemanager/2016/08/03/scsm-2016-upgrade-steps-for-custom-development/) and my colleague [Kurt Van Hoecke](http://www.scug.nl/system-center/scsm-2016-steps-used-for-upgrading-custom-development/) have already blogged about the specifics.
+
+As you will be possibly maintainig 2 versions of your code from here on, it is advised to minimize the effort you put in 2012 afterwards (unless you are a vendor fo course). During the upgrade project phase, MP code changes should be avoided to prevent regression issues.
+
+After having both the 3rd party and in-house MP's compatible, I usually place them in a single location from which I can easily start the import once my management servers are updated.
+
+## OS & SQL Version Requirements
+
+Often overlooked (also by my :()) but very important before estimating the needed time to upgrade: are your supporting platforms [compatible]?(https://technet.microsoft.com/en-us/system-center-docs/system-requirements/system-requirements)?
+
+For the OS: SCSM 2016 requires Server 2012 R2 or higher.
+
+For SQL: SQL Server 2012 SP2 or higher is needed.
+
+
+Depending on the SCSM component, getting to a supported OS/SQL level can be simple or hard. I will provide the best approach for each component in the upgrade section. For the SQL platform, use this [guide](https://blogs.technet.microsoft.com/servicemanager/2012/04/22/moving-the-service-manager-and-dw-databases/) to migrate your databases to a supported platform before upgrading (also check the comments for extra steps not present in the article).
+
+## Orchestrator Integration Packs
+
+(I included SCO in the scope of an SCSM upgrade as they are usually installed together for ITSM automation purposes)
+
+Aside from ancient integration packs, most ones just keep working in SCO 2016. Microsoft has provided an [updated set integration packs](https://www.microsoft.com/en-us/download/details.aspx?id=54098), but they just contain updated binaries without new features.
+
+I noticed that installing them through the deployment manager can fail because the shared configuration with their 2012-versions.
+
+What worked very well (and should for every other integration pack) is to just extract the MSI-component from the OIP file (by renaming the extension to zip) and installing it on the new Orchestrator management / runbook servers. The deployment manager is not needed! This resulted in the new versions taking over the activities and configurations without any modifications!
+
+Just like the custom MP's, I just collect all needed OIP-files (and their MSI's) and use them when needed in the upgrade sequence.
+
+# Upgrading
+
+When your assesment and preparations are complete, it is time to announce some downtime and get upgrading.
+
+Actually, the upgrade can be performed in 3 distinct steps, allowing you to stretch the upgrade over multiple downtime windows:
+
+## Upgrade Order
+
+__Window 1__
+
+1. Data Warehouse
+
+__Windows 2__
+
+2. Primary Management Server
+
+3. Secondary Management Server(s)
+
+4. Portal Server(s)
+
+__Window 3__
+
+5. Orchestrator
+
+The data warehouse is not a critical component (although the BI team might insist that the downtime is minimized), and has no impact on the day-to-day ticket handling aside from a possible pop-up stating that the DW is not available.
+
+The management servers, and portal servers that depend on them, should be considered as a single upgrade block, as mixing different versions of management servers is anything but supported.
+
+As SCSM 2016 has [downlevel support](https://blogs.technet.microsoft.com/servicemanager/2017/01/03/extending-the-support-of-platforms-for-sm-2016/) for Orchestrator 2012, the last one can be treated as a separate upgrade.
+
+Ok, now that we got the upgrade sequence planned and primed, lets get dirty!
+
+## Upgrade Sequence
+
+### Data Warehouse
+
+* As with every major change, backup your DW databases!
+
+* If you are not running Server 2012 R2, in-place upgrade the OS (disable the SCSM services during the upgrade to prevent issues). Should you not upgrade further to the Server 2016 OS post-SCSM upgrade, you might want to do a 'swap' instead (more on that later)
+
+* Disable the data-warehouse jobs using the SCSM console, or use [this script](https://blogs.technet.microsoft.com/mihai/resetting-and-running-the-service-manager-data-warehouse-jobs-separately/) (you'll need to modify it so it doesn't restart the jobs after disabling them). I highly recommend the script as it also allows you to validate that the jobs are executing correctly post-upgrade.
+
+* Run the SCSM 2016 setup and follow instructions. It is a next-next-finish experience and the upgrade process should be painless
+
+* Install the latest update rollup for SCSM 2016 (currently [update rollup 2](https://support.microsoft.com/en-us/help/3209594))
+
+* Keep the jobs disabled untill your management servers have been upgraded. Otherwise you'll confuse the DW, and we all know where that leads to...
+
+* If you want to upgrade further then do these additional steps
+
+    * Backup the secure storage key
+
+    * Recreate the DW Virtual Machine with the SAME name but a Server 2016 OS.
+
+    * Restore the storage key
+    
+    * To prevent issues, reset the SRS and AS instances and let the DW rebuild them (if they were installed on the DW server, reinstall them but do not restore any content).
+
+    * Run the SCSM 2016 DW install and point to the existing databases. Use the same accounts as the 2012-setup.
+
+    * Reapply the latest update rollup
+
+    * Use the script mentioned above to validate the ETL jobs
+
+    * Should the restore of the DW fail, these are some of the possible reasons:
+
+        * You are reusing an existing SRS instance. Reset the SRS (ust create a new SRS database using the reporting services manager), but make sure to backup any custom reports not contained in a management pack first from using the Reports web-site!
+
+        * After the upgrade fails, you'll need to manually remove the 'Microsoft Operations Manager' and 'System Center 2010' keys under 'HKLM:\Software\Microsoft'. After deleting the keys, restore the secure storage key again, as this will make new registry modifications required for the DW restore to succeed.
+
+### Primary Management Server
+
+* Backup the Service Manager database
+
+* If you are on an unsupported OS, setup or appoint a secondary management server with a supported OS and use the [promote procedure](https://technet.microsoft.com/en-us/library/hh524221(v=sc.12).aspx) to make it the primary server in the SCSM topology.
+
+    * Some 3rd party addons like Provance need to be changed as well when the role is transferred, check the documentation for instructions.
+
+* Make sure that [.NET 4.5.1](https://www.microsoft.com/en-us/download/details.aspx?id=40779) is installed (only when running Server 2012 R2, it is included in Server 2016)
+
+* Run the SCSM 2016 setup on the (new) primary server, again, it is a next-next-finish procedure.
+
+* Before opening the console, you should clear all caches to make sure that no 2012 files remain:
+
+    * Remove all content in 'C:\users\<your_username>\AppData\Local\Microsoft\System Center 2010\'
+    * Remove the registry key: 'HKCU:\Software\Microsoft\System Center 2012\Console'
+
+> NOTE: it is advised to clear every user's SCSM console to minimize possible issues
+
+* Use the console to import all management packs that need upgrading.
+
+* Clear the caches again to ensure that the new management packs are used by the console
+
+* If it still seems that new versions are not getting activated in the console, try to restart the 'System Center Data Access Service' as it sometimes seems to cache some stuff server-side.
+
+* If you want to move on to Server 2016 at this point, just setup a secondary server on a 2016 machine and redo the promote-procedure.
+
+* In all cases, as the last step, you shoud apply the latest update rollup
+
+* At this point, you can reactivate the data-warehouse, but if you have moved the primary role, you need to update the DW with this new information Check [this post](http://aquilaweb.net/2015/07/29/scsm-changing-the-workflow-management-server/) for all information.
+
+* Run the ETL script to verify that all DW jobs are OK. If they keep erroring or stalling, perform [this procedure](https://scsm.guru/2016/02/07/scsm-datawarehouse-jobs-failing/) (after taking a backup as this is not supported) to reset the jobs in the DW databases. Afterwards, run the ETL script again. The first MPSyncJob after the upgrade can take a long time as it will sync all new MP versions to the DW. Patience is virtue ;)
+
+### Secondary Management Servers
+
+Aside from possible reconfiguration of your load-balancer, the most simple thing to do is just create new machines with your target OS (at least Server 2012 R2), setup the secondary management server role and [remove the old ones from the toplogy](https://marcelzehner.ch/2012/08/01/dealing-with-multiple-management-servers-33-decommission-old-management-servers/).
+
+### Portal Servers
+
+* Backup all portal files (in the SelfServicePortal folder in the root IIS location)
+
+* If you are running the portal together with a management server, you should first apply a [hotfix](https://www.microsoft.com/en-us/download/details.aspx?id=54060) to preven upgrade issues.
+
+* The portal is upgraded together with the management server
+
+* So...it is only next-next-finish for standalone portal servers, which is not a recommended configuration
+
+* Install the latest update rollup
+
+* Use a tool like [WinMerge](http://winmerge.org/?lang=en) to carefully merge your customizations back into the new 2016 portal files. This is not easy, as you'll need to distinguish between your changes and Microsoft's. If in doubt, DON'T copy the change from 2012 and do a visual inspection of the portal to determine whether the change should in fact be merged.
+
+* Do not use WinMerge for the web.config file, just check your app settings and reapply them to the new one manually
+
+### Orchestrator
+
+* Backup the Orchestrator database
+
+* Setup a new VM with your target OS (if the current VM is already compatible, uninstall Orchestrator 2012 in its entirety, but retain the database)
+
+* If needed, copy over any custom folder / registry / ... structures that you runbooks use for logging or other purposes
+
+* Run the Orchestrator 2016 setup on the (new) VM, and reuse the database and service account
+
+* Install all integration pack MSI files for the IP's you use in the runbooks
+
+* Open the deployment manager and remove the previous Orchestrator server from the toplogy. When prompted, choose to disassociate all runbooks.
+
+* Open the Runbook Designer and verify that
+
+    * There are no runbooks with unknown activites (if so, you are missing an IP)
+    * All monitor runbooks that should be running are running
+    * All global confgurations are OK and up-to-date (don't forget the new SCSM / Orchestrator server address)
+
+* Change all SCO connectors in SCSM to point to the new web service endpoint, and resynchronize
+
+* Validate functionality by consuming a service offering with an attached runbook activity in the portal
+
+
+That's it, you should be on the SCSM 2016 platform, congratulations! If you are having issues, check the upgrade logs (usually in the install account's temp folder or the C:\programdata folder) for any errors and either fix, google or comment them here ;).
+
+# Post-Upgrade
+
+Validation is key post-upgrade. Both you and all SCSM stakeholders should validate their processes and subit feedback if anything is out of the ordinary. Foreseeing some days of after-care is recommended. Also, don't forget to upgrade your consoles ;)
+
+
+This was a major brain dump regarding the upgrade, I'll try to keep this post up-to-date should anything occur during the next upgrades that are coming my way. Having a fixed sequence and approach really helps in standardizing the migration process, resulting in a quality upgrade and a happy customer / end-user! Good luck on your upgrade endeavours!
+
+Jan out.
