@@ -44,13 +44,13 @@ For in-house (or tailored) MP's, you (or your SCSM guru) will need to take the c
 
 I am not going to detail the process of upgrading code in this post, as both [Microsoft](https://blogs.technet.microsoft.com/servicemanager/2016/08/03/scsm-2016-upgrade-steps-for-custom-development/) and my colleague [Kurt Van Hoecke](http://www.scug.nl/system-center/scsm-2016-steps-used-for-upgrading-custom-development/) have already blogged about the specifics.
 
-As you will be possibly maintainig 2 versions of your code from here on, it is advised to minimize the effort you put in 2012 afterwards (unless you are a vendor fo course). During the upgrade project phase, MP code changes should be avoided to prevent regression issues.
+As you will be possibly maintaining 2 versions of your code from here on, it is advised to minimize the effort you put in 2012 afterwards (unless you are a vendor fo course). During the upgrade project phase, MP code changes should be avoided to prevent regression issues.
 
 After having both the 3rd party and in-house MP's compatible, I usually place them in a single location from which I can easily start the import once my management servers are updated.
 
 ## OS & SQL Version Requirements
 
-Often overlooked (also by my :()) but very important before estimating the needed time to upgrade: are your supporting platforms [compatible]?(https://technet.microsoft.com/en-us/system-center-docs/system-requirements/system-requirements)?
+Often overlooked (also by my :()) but very important before estimating the needed time to upgrade: are your supporting platforms [compatible](https://technet.microsoft.com/en-us/system-center-docs/system-requirements/system-requirements)?
 
 For the OS: SCSM 2016 requires Server 2012 R2 or higher.
 
@@ -83,7 +83,7 @@ __Window 1__
 
 1. Data Warehouse
 
-__Windows 2__
+__Window 2__
 
 2. Primary Management Server
 
@@ -148,6 +148,8 @@ Ok, now that we got the upgrade sequence planned and primed, lets get dirty!
 * If you are on an unsupported OS, setup or appoint a secondary management server with a supported OS and use the [promote procedure](https://technet.microsoft.com/en-us/library/hh524221(v=sc.12).aspx) to make it the primary server in the SCSM topology.
 
     * Some 3rd party addons like Provance need to be changed as well when the role is transferred, check the documentation for instructions.
+
+    * Remember to move over any workflows DLL files you have in the SCSM install directory to the new primary server!
 
 * Make sure that [.NET 4.5.1](https://www.microsoft.com/en-us/download/details.aspx?id=40779) is installed (only when running Server 2012 R2, it is included in Server 2016)
 
