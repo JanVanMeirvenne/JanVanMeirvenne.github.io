@@ -160,17 +160,17 @@ Ok, now that we got the upgrade sequence planned and primed, lets get dirty!
     * Remove all content in 'C:\users\<your_username>\AppData\Local\Microsoft\System Center 2010\'
     * Remove the registry key: 'HKCU:\Software\Microsoft\System Center 2012\Console'
 
-> NOTE: it is advised to clear every user's SCSM console to minimize possible issues
+> NOTE: it is advised to clear every user's SCSM console after it is upgraded to 2016 to minimize possible issues
 
 * Use the console to import all management packs that need upgrading.
 
 * Clear the caches again to ensure that the new management packs are used by the console
 
-* If it still seems that new versions are not getting activated in the console, try to restart the 'System Center Data Access Service' as it sometimes seems to cache some stuff server-side.
+* If it still seems that new versions are not getting activated in the console, try to restart the 'System Center Data Access Service' as it sometimes seems to cache some stuff server-side. This incures downtime, so only do this is a service window!
 
 * If you want to move on to Server 2016 at this point, just setup a secondary server on a 2016 machine and redo the promote-procedure.
 
-* In all cases, as the last step, you shoud apply the latest update rollup
+* In all cases, as the last step, you should apply the latest update rollup
 
 * At this point, you can reactivate the data-warehouse, but if you have moved the primary role, you need to update the DW with this new information Check [this post](http://aquilaweb.net/2015/07/29/scsm-changing-the-workflow-management-server/) for all information.
 
