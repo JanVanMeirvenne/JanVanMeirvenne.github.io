@@ -225,7 +225,7 @@ That's it, you should be on the SCSM 2016 platform, congratulations! If you are 
 
 # Post-Upgrade
 
-Validation is key post-upgrade. Both you and all SCSM stakeholders should validate their processes and subit feedback if anything is out of the ordinary. Foreseeing some days of after-care is recommended. Also, don't forget to upgrade your consoles ;)
+Validation is key post-upgrade. Both you and all SCSM stakeholders should validate their processes and subit feedback if anything is out of the ordinary. Foreseeing some days of after-care is recommended. Also, don't forget to upgrade your consoles...and throw away the 2012-garbage ;)
 
 
 This was a major brain dump regarding the upgrade, I'll try to keep this post up-to-date should anything occur during the next upgrades that are coming my way. Having a fixed sequence and approach really helps in standardizing the migration process, resulting in a quality upgrade and a happy customer / end-user! Good luck on your upgrade endeavours!
