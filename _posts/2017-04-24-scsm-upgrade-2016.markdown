@@ -129,6 +129,8 @@ Ok, now that we got the upgrade sequence planned and primed, lets get dirty!
     
     * To prevent issues, reset the SRS and AS instances and let the DW rebuild them (if they were installed on the DW server, reinstall them but do not restore any content).
 
+    * Also, due to a bug in the installer, you need to temporarely install a DB engine on the same server (and same instance name) as the SRS server. You can remove this role after the upgrade.
+
     * Run the SCSM 2016 DW install and point to the existing databases. Use the same accounts as the 2012-setup.
 
     * Reapply the latest update rollup
