@@ -111,6 +111,55 @@ Ok, now that we got the upgrade sequence planned and primed, lets get dirty!
 
 * If you are not running Server 2012 R2, in-place upgrade the OS (disable the SCSM services during the upgrade to prevent issues). Should you not upgrade further to the Server 2016 OS post-SCSM upgrade, you might want to do a 'swap' instead (more on that later)
 
+* Run this SQL query on the DWRepository database to prevent issues post-upgrade:
+
+```SQL
+;WITH FactName  
+AS (  
+       select w.WarehouseEntityName from etl.WarehouseEntity w  
+       join etl.WarehouseEntityType t on w.WarehouseEntityTypeId = t.WarehouseEntityTypeId  
+       where t.WarehouseEntityTypeName = 'Fact'  
+),FactList  
+AS (  
+    SELECT  PartitionName, p.WarehouseEntityName,  
+            RANK() OVER ( PARTITION BY p.WarehouseEntityName ORDER BY PartitionName ASC ) AS RK  
+    FROM    etl.TablePartition p  
+       join FactName f on p.WarehouseEntityName = f.WarehouseEntityName  
+)  
+, FactPKList  
+AS (  
+    SELECT  f.WarehouseEntityName, a.TABLE_NAME, a.COLUMN_NAME, b.CONSTRAINT_NAME, f.RK,  
+            CASE WHEN b.CONSTRAINT_NAME = 'PK_' + f.WarehouseEntityName THEN 1 ELSE 0 END AS DefaultConstraints  
+    FROM    FactList f  
+    JOIN    INFORMATION_SCHEMA.KEY_COLUMN_USAGE a ON f.PartitionName = a.TABLE_NAME  
+    JOIN    INFORMATION_SCHEMA.TABLE_CONSTRAINTS b ON a.CONSTRAINT_NAME = b.CONSTRAINT_NAME AND b.CONSTRAINT_TYPE = 'Primary key'  
+)  
+, FactWithoutDefaultConstraints  
+AS (  
+    SELECT  a.*  
+    FROM    FactPKList a  
+    LEFT JOIN FactPKList b ON b.WarehouseEntityName = a.WarehouseEntityName AND b.DefaultConstraints = 1  
+    WHERE   b.WarehouseEntityName IS NULL AND a.RK = 1  
+)  
+, FactPKListStr  
+AS (  
+    SELECT  DISTINCT f1.WarehouseEntityName, f1.TABLE_NAME, f1.CONSTRAINT_NAME, F.COLUMN_NAME AS PKList  
+    FROM    FactWithoutDefaultConstraints f1  
+    CROSS APPLY (  
+                    SELECT  '[' + COLUMN_NAME + '],'  
+                    FROM    FactWithoutDefaultConstraints f2  
+                    WHERE   f2.TABLE_NAME = f1.TABLE_NAME  
+                    ORDER BY COLUMN_NAME  
+                FOR  
+                   XML PATH('')  
+                ) AS F (COLUMN_NAME)  
+)  
+SELECT  'ALTER TABLE [dbo].[' + f.TABLE_NAME + '] DROP CONSTRAINT [' + f.CONSTRAINT_NAME + ']' + CHAR(13) + CHAR(10) +  
+        'ALTER TABLE [dbo].[' + f.TABLE_NAME + '] ADD CONSTRAINT [PK_' + f.WarehouseEntityName + '] PRIMARY KEY NONCLUSTERED (' + SUBSTRING(f.PKList, 1, LEN(f.PKList) -1) + ')' + CHAR(13) + CHAR(10)  
+FROM    FactPKListStr f  
+
+```
+
 * Disable the data-warehouse jobs using the SCSM console, or use [this script](https://blogs.technet.microsoft.com/mihai/resetting-and-running-the-service-manager-data-warehouse-jobs-separately/) (you'll need to modify it so it doesn't restart the jobs after disabling them). I highly recommend the script as it also allows you to validate that the jobs are executing correctly post-upgrade.
 
 * Run the SCSM 2016 setup and follow instructions. It is a next-next-finish experience and the upgrade process should be painless
